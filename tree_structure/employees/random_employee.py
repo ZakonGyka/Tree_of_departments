@@ -1,10 +1,9 @@
-from .models import Worker
-from .forms import WorkerForm
+import random
 
 from django.core.files import File
 
-import random
-
+from .forms import WorkerForm
+from .models import Worker
 
 FirstName = "Jay", "Jim", "Roy", "Axel", "Billy", "Charlie", "Jax", "Gina", "Paul",\
             "Ringo", "Ally", "Nicky", "Cam", "Ari", "Trudie", "Cal", "Carl", "Lady", "Lauren",\

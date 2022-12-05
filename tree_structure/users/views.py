@@ -1,13 +1,9 @@
-from django.views.generic.edit import FormView
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login
-from django.urls import reverse_lazy
-
+from django.contrib.auth import login, logout
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.http import HttpResponseRedirect
+from django.urls import reverse_lazy
 from django.views.generic.base import View
-from django.contrib.auth import logout
-# Create your views here.
+from django.views.generic.edit import FormView
 
 
 class RegisterFormView(FormView):
@@ -35,4 +31,4 @@ class LogoutView(View):
 
     def get(self, request):
         logout(request)
-        return HttpResponseRedirect(" ")
+        return HttpResponseRedirect("/employees")

@@ -1,10 +1,8 @@
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import render
-from django.shortcuts import HttpResponse, HttpResponseRedirect
-from employees.models import Worker
-from employees.forms import WorkerForm
-# from employees.models import Subdivision
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
+from django.shortcuts import HttpResponse, HttpResponseRedirect, render
+from employees.forms import WorkerForm
+from employees.models import Worker
 
 
 def is_ajax(request):
