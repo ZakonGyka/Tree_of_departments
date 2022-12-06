@@ -1,62 +1,10 @@
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-    {% load static %}
-    <title>Tree_of_departments</title>
-    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="{% static 'js/jquery.nestable.js' %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="{% static 'js/jquery.nestable.js' %}"></script>
 
-
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-  <div class="card card-image" style="border: none;">
-    <div class="rgba-black-strong py-5 px-4">
-      <div class="row d-flex justify-content-center">
-        <div class="col-md-10 col-xl-8">
-          <div class="card mb-4">
-            <div class="card-header p-0 z-depth-1">
-              <div class="d-table">
-                <div class="d-tr">
-                  <div class="d-td" style="width:60%">
-                    <i class="fa fa-cloud fa-2x p-3 mr-4 float-left black-text" aria-hidden="true"></i>
-                    <h4 class="text-uppercase white-text mb-0 py-3 mt-1">
-                        {% if user.is_authenticated %}
-                            <a href="{% url 'show_employees_all' %}">employee hierarchy</a>
-                        {% else %}
-                            employee hierarchy
-                        {% endif %}
-                    </h4>
-                  </div>
-                  <div class="d-td" style="width:20%">
-                      {% if user.is_authenticated %}
-                        <h4>account: {{ user }}</h4>
-                      {% else %}
-                        <a href="{% url 'users:register' %}"><h4>REGISTRATION</h4></a>
-                      {% endif %}
-                  </div>
-                  <div class="d-td" style="width:20%">
-                      {% if user.is_authenticated %}
-                        <a href="{% url 'users:logout' %}"><h4>LOG OUT</h4></a>
-                      {% else %}
-                        <a href="{% url 'users:login' %}"><h4>LOG IN</h4></a>
-                      {% endif %}
-                  </div>
-                </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 {% csrf_token %}
 
@@ -98,10 +46,7 @@
     var csrftoken = getCookie('csrftoken');
 </script>
 
-
-
 <script>
-
 
 $(document).ready(function()
 {
@@ -138,5 +83,4 @@ $('.dd').on('uploadchildren', function() {
 });
 
 </script>
-</body>
-</html>
+{% endblock %}
