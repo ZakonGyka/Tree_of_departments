@@ -10,7 +10,6 @@ def is_ajax(request):
 
 
 def show_employees(request):
-    global employees
     if is_ajax(request=request):
         text = request.GET['children_id']
         node = Worker.objects.get(id=text)
