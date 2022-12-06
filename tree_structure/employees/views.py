@@ -28,7 +28,6 @@ def show_employees(request):
 def show_employees_all(request):
     if request.user.is_authenticated:
         employees = Worker.objects.order_by('date_added')
-        context = {}
         current_page = Paginator(list(employees), 20)
         page_number = request.GET.get('page')
         page = current_page.get_page(page_number)
