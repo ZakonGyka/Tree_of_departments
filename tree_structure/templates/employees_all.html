@@ -31,16 +31,38 @@
     </div>
 </div>
 
-    {% if products.has_other_pages %}
-        {% include "paginator.html" with items=products paginator=paginator geturl=request.GET.urlencode %}
-    {% endif %}
-
-<!--
-{% block page %}
-    <div id="div_sort">
-    {% include 'employees_all_sort.html' %}
+<div id="div_sort">
+    <div class="rgba-black-strong py-0 px-4">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-10 col-xl-8">
+          <div class="card mb-4">
+            <div class="card-header p-0 z-depth-1">
+                <div class="d-table"><div id="div_sort">
+                    {% for employee in employees %}
+                        <div class="d-table">
+                            <div class="d-tr">
+                                <div class="d-td" style="width:35%"><h4><a href="{% url 'edit' employee_id=employee.id %}">{{ employee.full_name }}</a></h4></div>
+                                <div class="d-td" style="width:15%"><h4>{{ employee.position }}</h4></div>
+                                <div class="d-td" style="width:15%"><h4>{{ employee.employment_date|date:'Y.M.d' }}</h4></div>
+                                <div class="d-td" style="width:15%"><h4>{{ employee.salary }}</h4></div>
+                                <div class="d-td" style="width:10%"><a href="{% url 'delete' employee_id=employee.id %}"><h4>DELETE</h4></a></div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-{% endblock %}
--->
+
+
+
+{% if employees.has_other_pages %}
+    {% include "paginator.html" with items=employees paginator=paginator geturl=request.GET.urlencode %}
+{% endif %}
+
 
 {% endblock %}

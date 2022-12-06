@@ -48,9 +48,10 @@ def show_employees_all(request):
             employees = employees | Worker.objects.order_by(sort_by).filter(Q(employment_start_date__icontains=search_text))
             context = {}
             current_page = Paginator(list(employees), 20)
-            page = request.GET['page']
+            page_number = request.GET['page']
+            page = current_page.get_page(page_number)
             try:
-                context['employees'] = current_page.page(page)
+                context['employees'] = page
             except PageNotAnInteger:
                 context['employees'] = current_page.page(1)
             except EmptyPage:
@@ -61,14 +62,18 @@ def show_employees_all(request):
             employees = Worker.objects.order_by('date_added')
             context = {}
             current_page = Paginator(list(employees), 20)
-            page = request.GET.get('page')
+            page_number = request.GET.get('page')
+            page = current_page.get_page(page_number)
             try:
-                context['employees'] = current_page.page(page)
+                context['employees'] = current_page.page(page_number)
             except PageNotAnInteger:
                 context['employees'] = current_page.page(1)
             except EmptyPage:
                 context['employees'] = current_page.page(current_page.num_pages)
-            return render(request, 'employees_all.html', context)
+            return render(request, 'employees_all.html', {
+                'paginator': current_page,
+                'employees': page,
+            })
     else:
         return HttpResponseRedirect("/users/login")
 
