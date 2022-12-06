@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 {% load static %}
+
 {% block content %}
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="{% static 'js/jquery.nestable.js' %}"></script>
-
+<script src="{% static 'js/uploadchildren.js' %}"></script>
+<script src="{% static 'js/getCookie.js' %}"></script>
 
 {% csrf_token %}
 
@@ -27,60 +29,4 @@
   </div>
 </div>
 
-<script>
-        function getCookie(name) {
-        var cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            var cookies = document.cookie.split(';');
-            for (var i = 0; i < cookies.length; i++) {
-                var cookie = jQuery.trim(cookies[i]);
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-    var csrftoken = getCookie('csrftoken');
-</script>
-
-<script>
-
-$(document).ready(function()
-{
-    $("button").click(function(){
-        $("#div1").load("employees_list.txt");
-    });
-    // activate Nestable for list 1
-    $('#nestable').nestable({
-        group: 1
-    })//.nestable('collapseAll');
-    $('#nestable2').nestable({
-        group: 1
-    })
-    .on('change', updateOutput);
-
-
-
-    $('#nestable-menu').on('click', function(e)
-    {
-        var target = $(e.target),
-            action = target.data('action');
-        if (action === 'collapse-all') {
-            $('.dd').nestable('collapseAll');
-        }
-        if (action === 'expand-all') {
-            $('.dd').nestable('expandAll');
-        }
-    });
-});
-
-
-$('.dd').on('uploadchildren', function() {
-
-});
-
-</script>
 {% endblock %}
