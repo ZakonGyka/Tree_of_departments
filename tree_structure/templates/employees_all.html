@@ -31,11 +31,16 @@
     </div>
 </div>
 
+    {% if products.has_other_pages %}
+        {% include "paginator.html" with items=products paginator=paginator geturl=request.GET.urlencode %}
+    {% endif %}
 
+<!--
 {% block page %}
     <div id="div_sort">
     {% include 'employees_all_sort.html' %}
     </div>
 {% endblock %}
+-->
 
 {% endblock %}
