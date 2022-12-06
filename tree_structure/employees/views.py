@@ -1,5 +1,4 @@
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.db.models import Q
+from django.core.paginator import Paginator
 from django.shortcuts import HttpResponse, HttpResponseRedirect, render
 from employees.forms import WorkerForm
 from employees.models import Worker
