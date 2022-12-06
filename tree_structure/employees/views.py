@@ -89,10 +89,9 @@ def edit(request, employee_id):
 
 
 def delete(request, employee_id):
-    parent = Worker.objects.get(id=employee_id)
-    for child in parent.get_children():
-        print(child)
-        child.parent = parent.parent
+    employee = Worker.objects.get(id=employee_id)
+    for child in employee.get_children():
+        child.parent = employee.parent
         child.save()
-    parent.delete()
+    employee.delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
