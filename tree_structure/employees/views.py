@@ -11,11 +11,9 @@ def is_ajax(request):
 
 def show_employees(request):
     if is_ajax(request=request):
-        text = request.GET['children_id']
-        node = Worker.objects.get(id=text)
-        employees = node.get_descendants(include_self = "True").filter(level__lte=node.level + 3)
-        data = {}
-        data['employees'] = employees
+        children_id = request.GET['children_id']
+        employee = Worker.objects.get(id=children_id)
+        employees = employee.get_descendants(include_self="True").filter(level__lte=employee.level + 3)
         response = render(request, 'employees_list.html', {'employees': employees})
         return response
     else:
