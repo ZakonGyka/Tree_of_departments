@@ -91,8 +91,8 @@ def edit(request, employee_id):
     return render(request, 'edit.html', context)
 
 
-def delete(request, id):
-    parent = Worker.objects.get(id=id)
+def delete(request, employee_id):
+    parent = Worker.objects.get(id=employee_id)
     for child in parent.get_children():
         print(child)
         child.parent = parent.parent

@@ -13,7 +13,7 @@
                                 <div class="d-td" style="width:15%"><h4>{{ employee.position }}</h4></div>
                                 <div class="d-td" style="width:15%"><h4>{{ employee.employment_date|date:'Y.M.d' }}</h4></div>
                                 <div class="d-td" style="width:15%"><h4>{{ employee.salary }}</h4></div>
-                                <div class="d-td" style="width:10%"><a href="{% url 'delete' id=employee.id %}"><h4>DELETE</h4></a></div>
+                                <div class="d-td" style="width:10%"><a href="{% url 'delete' employee_id=employee.id %}"><h4>DELETE</h4></a></div>
                             </div>
                         </div>
                     {% endfor %}
