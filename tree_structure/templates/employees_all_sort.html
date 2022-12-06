@@ -9,7 +9,7 @@
                     {% for employee in employees %}
                         <div class="d-table">
                             <div class="d-tr">
-                                <div class="d-td" style="width:35%"><h4><a href="{% url 'edit' id=employee.id %}">{{ employee.full_name }}</a></h4></div>
+                                <div class="d-td" style="width:35%"><h4><a href="{% url 'edit' employee_id=employee.id %}">{{ employee.full_name }}</a></h4></div>
                                 <div class="d-td" style="width:15%"><h4>{{ employee.position }}</h4></div>
                                 <div class="d-td" style="width:15%"><h4>{{ employee.employment_date|date:'Y.M.d' }}</h4></div>
                                 <div class="d-td" style="width:15%"><h4>{{ employee.salary }}</h4></div>

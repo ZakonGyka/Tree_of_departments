@@ -11,7 +11,6 @@ def is_ajax(request):
 
 def show_employees(request):
     global employees
-    # if request.is_ajax():
     if is_ajax(request=request):
         text = request.GET['children_id']
         node = Worker.objects.get(id=text)
@@ -24,8 +23,8 @@ def show_employees(request):
         employees = Worker.objects.all().filter(level__lte=1)
         return render(request, "employees.html", {'employees': employees})
 
+
 def change_boss(request):
-    # if request.is_ajax():
     if is_ajax(request=request):
         boss_id = request.GET['boss_id']
         children_id = request.GET['children_id']
@@ -43,7 +42,6 @@ def change_boss(request):
 
 def show_employees_all(request):
     if request.user.is_authenticated:
-        # if request.is_ajax():
         if is_ajax(request=request):
             sort_by = request.GET['sort_by']
             search_text = request.GET['q_search']
@@ -78,8 +76,8 @@ def show_employees_all(request):
         return HttpResponseRedirect("/users/login")
 
 
-def edit (request, id):
-    employee = Worker.objects.get(id=id)
+def edit(request, employee_id):
+    employee = Worker.objects.get(id=employee_id)
     if request.method != 'POST':
         form = WorkerForm(instance=employee, prefix='form')
         request.session['return_path'] = request.META.get('HTTP_REFERER','/')
@@ -93,7 +91,7 @@ def edit (request, id):
     return render(request, 'edit.html', context)
 
 
-def delete (request, id):
+def delete(request, id):
     parent = Worker.objects.get(id=id)
     for child in parent.get_children():
         print(child)
@@ -101,9 +99,3 @@ def delete (request, id):
         child.save()
     parent.delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
-# def show_subdivisions(request):
-#     return render(request, "subdivisions.html",
-#                   {'subdivisions': Subdivision.objects.all()}
-#                   )
-
