@@ -2,8 +2,8 @@ import random
 
 from django.core.files import File
 
-from .forms import WorkerForm
-from .models import Worker
+from employees.forms import WorkerForm
+from employees.models import Worker
 
 FirstName = "Jay", "Jim", "Roy", "Axel", "Billy", "Charlie", "Jax", "Gina", "Paul",\
             "Ringo", "Ally", "Nicky", "Cam", "Ari", "Trudie", "Cal", "Carl", "Lady", "Lauren",\
@@ -41,39 +41,58 @@ LastName = "Barker", "Style", "Spirits", "Murphy", "Blacker", "Bleacher", "Roger
          "Elliott", "Cunningham", "Knight", "Bradley"
 
 
-Salary_level_1 = "15000", "14000", "17000"
-Salary_level_2 = "10000", "11000", "10500", "9500", "9700", "9200"
-Salary_level_3 = "7500", "6500", "6700", "6900", "6850", "7250", "7450", "7350", "7150", "6800"
-Salary_level_4 = "4000", "5000", "4200", "4300", "4450", "4550", "4250", "4150", "4600", "4700"
-Salary_level_5 = "2000", "3000", "2200", "2300", "2450", "2550", "2250", "2150", "2600", "2700"
+# Salary_level_1 = "15000", "14000", "17000"
+# Salary_level_2 = "10000", "11000", "10500", "9500", "9700", "9200"
+# Salary_level_3 = "7500", "6500", "6700", "6900", "6850", "7250", "7450", "7350", "7150", "6800"
+# Salary_level_4 = "4000", "5000", "4200", "4300", "4450", "4550", "4250", "4150", "4600", "4700"
+# Salary_level_5 = "2000", "3000", "2200", "2300", "2450", "2550", "2250", "2150", "2600", "2700"
+# Employee_Day = random.choice(range(1, 31))
+# Employee_Year = random.choice(range(2010, 2022))
+# Employee_Month = random.choice(range(1, 13))
+def random_generator():
+    # First = random.choice(FirstName)
+    # Last = random.choice(LastName)
+    full_name = random.choice(FirstName) + ' ' + random.choice(LastName)
+    Employee_Day = str(random.choice(range(1, 31)))
+    Employee_Month = str(random.choice(range(1, 13)))
+    Employee_Year = str(random.choice(range(2010, 2022)))
+    employment_date = Employee_Year + '-' + Employee_Month + '-' + Employee_Day
+    Salary_level_1 = random.choice(range(5000, 6000, 100))
+    Salary_level_2 = random.choice(range(4000, 5000, 100))
+    Salary_level_3 = random.choice(range(3000, 4000, 100))
+    Salary_level_4 = random.choice(range(2000, 3000, 100))
+    Salary_level_5 = random.choice(range(1000, 2000, 100))
+    return full_name, employment_date, Salary_level_1, Salary_level_2,\
+           Salary_level_3, Salary_level_4, Salary_level_5
 
-Day = "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16",\
-
-Month = "01", "02", "03", "04", "05", "06", "07", "08",\
-        "09", "10", "11", "12"
-
-Year = "2016", "2017", "2018"
-
-folder_name = 'media\ '
-
-folder_name = folder_name.strip()
 
 
-img_file_name = "001", "002", "003", "005", "006", "007", "008", "009", "010"
+
+
+
+# folder_name = 'media\ '
+
+# folder_name = folder_name.strip()
+
+
+#img_file_name = "001", "002", "003", "005", "006", "007", "008", "009", "010"
 
 
 def run_random():
     count_one = 0
     for i_one in range(5):
         count_one = count_one + 1
+        full_name, employment_date, \
+        Salary_level_1, Salary_level_2, Salary_level_3, Salary_level_4, \
+        Salary_level_5 = random_generator()
         # print('count_one - ', count_one)
-        First = random.choice(FirstName)
-        Last = random.choice(LastName)
-        Employee_Salary_level_1 = random.choice(Salary_level_1)
-        Employee_Year = random.choice(Year)
-        Employee_Month = random.choice(Month)
-        Employee_Day = random.choice(Day)
-        form = WorkerForm(data={'full_name': First + ' ' + Last, 'position': "level 1", 'employment_date': Employee_Year + '-' + Employee_Month + '-' + Employee_Day, 'salary': Employee_Salary_level_1})
+        # First = random.choice(FirstName)
+        # Last = random.choice(LastName)
+        # Employee_Salary_level_1 = random.choice(Salary_level_1)
+        # Employee_Year = random.choice(range(2010, 2022))
+        # Employee_Month = random.choice(range(1, 13))
+        # Employee_Day = random.choice(range(1, 31))
+        form = WorkerForm(data={'full_name': full_name, 'position': "level 1", 'employment_date': employment_date, 'salary': Salary_level_1})
         form.save()
         current_child_len = Worker.objects.order_by('date_added')
         current_child_id = current_child_len[(len(current_child_len) - 1)]
@@ -86,18 +105,21 @@ def run_random():
         count_two = 0
         for i_two in range(3):
             count_two = count_two + 1
+            full_name, employment_date, \
+            Salary_level_1, Salary_level_2, Salary_level_3, Salary_level_4, \
+            Salary_level_5 = random_generator()
             # print('count_two - ', count_two)
-            First = random.choice(FirstName)
-            Last = random.choice(LastName)
-            Employee_Salary_level_2 = random.choice(Salary_level_2)
-            Employee_Year = random.choice(Year)
-            Employee_Month = random.choice(Month)
-            Employee_Day = random.choice(Day)
+            # First = random.choice(FirstName)
+            # Last = random.choice(LastName)
+            # Employee_Salary_level_2 = random.choice(Salary_level_2)
+            # Employee_Year = random.choice(Year)
+            # Employee_Month = random.choice(Month)
+            # Employee_Day = random.choice(Day)
             try:
-                form = WorkerForm(data={'full_name': First + ' ' + Last,
+                form = WorkerForm(data={'full_name': full_name,
                                         'position': "level 2",
-                                        'employment_date': Employee_Year + '-' + Employee_Month + '-' + Employee_Day,
-                                        'salary': Employee_Salary_level_2
+                                        'employment_date': employment_date,
+                                        'salary': Salary_level_2
                                         }
                                   )
                 form.save()
@@ -116,18 +138,21 @@ def run_random():
             count_three = 0
             for i_three in range(3):
                 count_three = count_three + 1
+                full_name, employment_date, \
+                Salary_level_1, Salary_level_2, Salary_level_3, Salary_level_4, \
+                Salary_level_5 = random_generator()
                 #print('count_three - ', count_three)
-                First = random.choice(FirstName)
-                Last = random.choice(LastName)
-                Employee_Salary_level_3 = random.choice(Salary_level_3)
-                Employee_Year = random.choice(Year)
-                Employee_Month = random.choice(Month)
-                Employee_Day = random.choice(Day)
+                # First = random.choice(FirstName)
+                # Last = random.choice(LastName)
+                # Employee_Salary_level_3 = random.choice(Salary_level_3)
+                # Employee_Year = random.choice(Year)
+                # Employee_Month = random.choice(Month)
+                # Employee_Day = random.choice(Day)
                 try:
-                    form = WorkerForm(data={'full_name': First + ' ' + Last,
+                    form = WorkerForm(data={'full_name': full_name,
                                             'position': "level 3",
-                                            'employment_date': Employee_Year + '-' + Employee_Month + '-' + Employee_Day,
-                                            'salary': Employee_Salary_level_3
+                                            'employment_date': employment_date,
+                                            'salary': Salary_level_3
                                             }
                                       )
                     form.save()
@@ -146,18 +171,21 @@ def run_random():
                 count_four = 0
                 for i_four in range(4):
                     count_four = count_four + 1
+                    full_name, employment_date, \
+                    Salary_level_1, Salary_level_2, Salary_level_3, Salary_level_4, \
+                    Salary_level_5 = random_generator()
                     #print('count_four - ', count_four)
-                    First = random.choice(FirstName)
-                    Last = random.choice(LastName)
-                    Employee_Salary_level_4 = random.choice(Salary_level_4)
-                    Employee_Year = random.choice(Year)
-                    Employee_Month = random.choice(Month)
-                    Employee_Day = random.choice(Day)
+                    # First = random.choice(FirstName)
+                    # Last = random.choice(LastName)
+                    # Employee_Salary_level_4 = random.choice(Salary_level_4)
+                    # Employee_Year = random.choice(Year)
+                    # Employee_Month = random.choice(Month)
+                    # Employee_Day = random.choice(Day)
                     try:
-                        form = WorkerForm(data={'full_name': First + ' ' + Last,
+                        form = WorkerForm(data={'full_name': full_name,
                                                 'position': "level 4",
-                                                'employment_date': Employee_Year + '-' + Employee_Month + '-' + Employee_Day,
-                                                'salary': Employee_Salary_level_4
+                                                'employment_date': employment_date,
+                                                'salary': Salary_level_4
                                                 }
                                           )
                         form.save()
@@ -176,21 +204,24 @@ def run_random():
                     count_five = 0
                     for i_five in range(5):
                         count_five = count_five + 1
+                        full_name, employment_date, \
+                        Salary_level_1, Salary_level_2, Salary_level_3, Salary_level_4, \
+                        Salary_level_5 = random_generator()
                         #print('count_five - ', count_five)
-                        First = random.choice(FirstName)
-                        Last = random.choice(LastName)
-                        Employee_Salary_level_5 = random.choice(Salary_level_5)
-                        Employee_Year = random.choice(Year)
-                        Employee_Month = random.choice(Month)
-                        Employee_Day = random.choice(Day)
+                        # First = random.choice(FirstName)
+                        # Last = random.choice(LastName)
+                        # Employee_Salary_level_5 = random.choice(Salary_level_5)
+                        # Employee_Year = random.choice(Year)
+                        # Employee_Month = random.choice(Month)
+                        # Employee_Day = random.choice(Day)
                         try:
-                            form = WorkerForm(data={'full_name': First + ' ' + Last,
+                            form = WorkerForm(data={'full_name': full_name,
                                                     'position': "level 5",
-                                                    'employment_date': Employee_Year + '-' + Employee_Month + '-' + Employee_Day,
-                                                    'salary': Employee_Salary_level_5
+                                                    'employment_date': employment_date,
+                                                    'salary': Salary_level_5
                                                     }
                                               )
-                            print('ON line 5 ! - name - ', First, '', Last)
+                            print('ON line 5 ! - name - ', full_name)
                             form.save()
                             current_child_len = Worker.objects.order_by('date_added')
                             current_child_id = current_child_len[(len(current_child_len) - 1)]
